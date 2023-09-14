@@ -1,8 +1,6 @@
 import puppeteer from "puppeteer";
 import fs from "fs/promises";
 
-// ... (Your code for generating Ids)
-
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -29,11 +27,6 @@ import fs from "fs/promises";
       page.waitForNavigation({ waitUntil: "networkidle0" }),
     ]);
 
-    // Refresh the page
-    // await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
-    // // check the page url
-    // console.log(`URL: ${page.url()}`);
-    // take a screenshot
     await page.screenshot({ path: "screenshot.png" });
     // Wait for a specific element that indicates the dynamic loading is complete
     await page.waitForSelector('input[name="facilityid"', {
@@ -76,15 +69,6 @@ import fs from "fs/promises";
 
     // write the csv file
     await fs.writeFile("data.csv", csvs.join("\n"));
-
-    // await page.goto(urls[0]);
-
-    // take a screenshot
-    // await page.screenshot({ path: "screenshot.png" });
-
-    // console.log(`CSV: ${csv}`);
-    // write the csv file
-    // await fs.writeFile("data.csv", csv);
   } catch (error) {
     console.error(`An error occurred: ${error}`);
   } finally {
